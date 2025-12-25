@@ -1,0 +1,115 @@
+{
+  "name": "Saber",
+  "type": "object",
+  "properties": {
+    "titulo": {
+      "type": "string",
+      "description": "Nome do saber compartilhado"
+    },
+    "narrativa": {
+      "type": "string",
+      "description": "Descrição ou história do saber"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": [
+        "medicina_tradicional",
+        "agricultura_ancestral",
+        "artesanato",
+        "musica_oral",
+        "historia_oral",
+        "praticas_espirituais",
+        "culinaria_tradicional",
+        "tecnologias_sociais"
+      ],
+      "default": "historia_oral",
+      "description": "Categoria do saber"
+    },
+    "territorio": {
+      "type": "string",
+      "enum": [
+        "quilombo",
+        "aldeia",
+        "periferia",
+        "floresta",
+        "campo",
+        "cidade",
+        "rio",
+        "montanha"
+      ],
+      "description": "Território de origem"
+    },
+    "guardiao": {
+      "type": "string",
+      "description": "Nome do guardião/mestre deste saber"
+    },
+    "audio_url": {
+      "type": "string",
+      "description": "URL do áudio com narrativa oral"
+    },
+    "imagem_url": {
+      "type": "string",
+      "description": "Imagem relacionada ao saber"
+    },
+    "comunidade": {
+      "type": "string",
+      "description": "Nome da comunidade de origem"
+    },
+    "tempo_circular": {
+      "type": "string",
+      "enum": [
+        "plantar",
+        "colher",
+        "chuvas",
+        "seca",
+        "lua_nova",
+        "lua_cheia",
+        "ancestrais",
+        "presente",
+        "futuro"
+      ],
+      "description": "Momento do ciclo temporal associado"
+    },
+    "conexoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "IDs de outros saberes conectados"
+    },
+    "valorizacoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails de usuários que valorizaram este saber",
+      "default": []
+    },
+    "compartilhamentos": {
+      "type": "integer",
+      "description": "Número de vezes que foi compartilhado",
+      "default": 0
+    }
+  },
+  "required": [
+    "titulo",
+    "tipo",
+    "territorio",
+    "guardiao"
+  ],
+  "rls": {
+    "read": {},
+    "write": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

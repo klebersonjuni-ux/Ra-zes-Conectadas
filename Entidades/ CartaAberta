@@ -1,0 +1,84 @@
+{
+  "name": "CartaAberta",
+  "type": "object",
+  "properties": {
+    "titulo": {
+      "type": "string",
+      "description": "Título da carta aberta"
+    },
+    "conteudo": {
+      "type": "string",
+      "description": "Conteúdo completo da carta"
+    },
+    "autor_nome": {
+      "type": "string",
+      "description": "Nome do autor"
+    },
+    "autor_email": {
+      "type": "string",
+      "description": "Email do autor (do usuário)"
+    },
+    "comunidade_origem": {
+      "type": "string",
+      "description": "Comunidade ou povo de origem do autor"
+    },
+    "territorio_origem": {
+      "type": "string",
+      "description": "Território de origem"
+    },
+    "destinatarios": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Para quem a carta é direcionada",
+      "default": []
+    },
+    "temas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Temas abordados na carta",
+      "default": []
+    },
+    "visibilidade": {
+      "type": "string",
+      "enum": [
+        "publica",
+        "comunidade",
+        "privada"
+      ],
+      "default": "publica",
+      "description": "Quem pode ver a carta"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "rascunho",
+        "publicada",
+        "arquivada"
+      ],
+      "default": "rascunho",
+      "description": "Status da carta"
+    },
+    "apoios": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails de quem apoiou a carta",
+      "default": []
+    },
+    "data_publicacao": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de publicação da carta"
+    }
+  },
+  "required": [
+    "titulo",
+    "conteudo",
+    "autor_email"
+  ]
+}
