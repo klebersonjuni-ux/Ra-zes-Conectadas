@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import { api } from "@/api";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -28,9 +28,9 @@ export default function Dashboard() {
     setIsLoading(true);
     try {
       const [currentUser, saberesData, comunidadesData] = await Promise.all([
-        base44.auth.me(),
-        base44.entities.Saber.list("-created_date", 20),
-        base44.entities.Comunidade.list("-created_date", 10)
+        api.auth.me(), 
+        api.entities.Saber.list("-created_date", 20), 
+        api.entities.Comunidade.list("-created_date", 10) 
       ]);
       setUser(currentUser);
       setSaberes(saberesData);

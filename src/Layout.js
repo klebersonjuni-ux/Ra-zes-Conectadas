@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { base44 } from "@/api/base44Client";
+import { api } from "@/api"; 
 import { Home, Map, Users, BookOpen, Mic, Leaf, FileText } from "lucide-react";
 import {
   Sidebar,
@@ -19,36 +19,12 @@ import {
 } from "@/components/ui/sidebar";
 
 const navigationItems = [
-  {
-    title: "Círculo de Saberes",
-    url: createPageUrl("Dashboard"),
-    icon: Home,
-  },
-  {
-    title: "Territórios",
-    url: createPageUrl("Territorios"),
-    icon: Map,
-  },
-  {
-    title: "Comunidades",
-    url: createPageUrl("Comunidades"),
-    icon: Users,
-  },
-  {
-    title: "Cartas Abertas",
-    url: createPageUrl("CartasAbertas"),
-    icon: FileText,
-  },
-  {
-    title: "Biblioteca Viva",
-    url: createPageUrl("Biblioteca"),
-    icon: BookOpen,
-  },
-  {
-    title: "Narrativas Orais",
-    url: createPageUrl("Narrativas"),
-    icon: Mic,
-  },
+  { title: "Círculo de Saberes", url: createPageUrl("Dashboard"), icon: Home },
+  { title: "Territórios", url: createPageUrl("Territorios"), icon: Map },
+  { title: "Comunidades", url: createPageUrl("Comunidades"), icon: Users },
+  { title: "Cartas Abertas", url: createPageUrl("CartasAbertas"), icon: FileText },
+  { title: "Biblioteca Viva", url: createPageUrl("Biblioteca"), icon: BookOpen },
+  { title: "Narrativas Orais", url: createPageUrl("Narrativas"), icon: Mic },
 ];
 
 export default function Layout({ children, currentPageName }) {
@@ -62,13 +38,12 @@ export default function Layout({ children, currentPageName }) {
     
     const checkOnboarding = async () => {
       try {
-        const currentUser = await base44.auth.me();
+        const currentUser = await api.auth.me();
         
         if (!isMounted) return;
         
         setUser(currentUser);
         
-        // Só redireciona para onboarding se não estiver já nessa página
         if (!currentUser.onboarding_completo && !location.pathname.includes('Onboarding')) {
           navigate(createPageUrl("Onboarding"), { replace: true });
         }
@@ -115,28 +90,11 @@ export default function Layout({ children, currentPageName }) {
             --color-pedra: #696969;
             --background-organico: #FAF7F0;
           }
-          
-          body {
-            background: var(--background-organico);
-            font-family: 'Inter', system-ui, sans-serif;
-          }
-          
-          .circular-flow {
-            border-radius: 50%;
-            transition: all 0.3s ease;
-          }
-          
-          .organic-border {
-            border-radius: 25px 5px 25px 5px;
-          }
-          
-          .terra-gradient {
-            background: linear-gradient(135deg, var(--color-terra) 0%, var(--color-raiz) 100%);
-          }
-          
-          .folha-gradient {
-            background: linear-gradient(135deg, var(--color-folha) 0%, #32CD32 100%);
-          }
+          body { background: var(--background-organico); font-family: 'Inter', system-ui, sans-serif; }
+          .circular-flow { border-radius: 50%; transition: all 0.3s ease; }
+          .organic-border { border-radius: 25px 5px 25px 5px; }
+          .terra-gradient { background: linear-gradient(135deg, var(--color-terra) 0%, var(--color-raiz) 100%); }
+          .folha-gradient { background: linear-gradient(135deg, var(--color-folha) 0%, #32CD32 100%); }
         `}
       </style>
       <div className="min-h-screen flex w-full bg-[var(--background-organico)]">
