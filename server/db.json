@@ -1,0 +1,13 @@
+{
+  "saberes": [],
+  "comunidades": [],
+  "cartas": [],
+  "usuarios": [
+    {
+      "id": 1,
+      "full_name": "Guardião Raiz",
+      "tipo_participante": "guardiao",
+      "onboarding_completo": true
+    }
+  ]
+}
