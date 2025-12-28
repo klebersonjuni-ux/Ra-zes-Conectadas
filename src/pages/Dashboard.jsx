@@ -8,9 +8,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
-import SaberCard from "../components/dashboard/SaberCard";
-import CirculoTemporal from "../components/dashboard/CirculoTemporal";
-import ConexoesTerritorio from "../components/dashboard/ConexoesTerritorio";
+// CORREÇÃO AQUI: Mudamos de "dashboard" para "painel"
+import SaberCard from "../components/painel/SaberCard";
+import CirculoTemporal from "../components/painel/CirculoTemporal";
+import ConexoesTerritorio from "../components/painel/ConexoesTerritorio";
 
 export default function Dashboard() {
   const [saberes, setSaberes] = useState([]);
