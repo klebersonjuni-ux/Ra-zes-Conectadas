@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { api } from "@/api";
+import { api } from "@/api"; // Importação correta
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -62,7 +62,7 @@ const createCustomIcon = (tipo) => {
         <span style="
           transform: rotate(45deg);
           font-size: 16px;
-        ">${territorioIcons[tipo]}</span>
+        ">${territorioIcons[tipo] || "📍"}</span>
       </div>
     `,
     iconSize: [32, 32],
@@ -86,7 +86,8 @@ export default function Territorios() {
   const loadComunidades = async () => {
     setIsLoading(true);
     try {
-      const data = await base44.entities.Comunidade.list("-created_date");
+      // CORREÇÃO: Usando api.entities em vez de base44.entities
+      const data = await api.entities.Comunidade.list("-created_date");
       setComunidades(data);
     } catch (error) {
       console.error("Erro ao carregar comunidades:", error);
